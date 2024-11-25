@@ -1,1 +1,1 @@
-Rust CLI Code
+Rust CLI Code for learning
