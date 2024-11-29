@@ -1,9 +1,8 @@
 use anyhow::Ok;
 use clap::Parser;
 use rcli::{
-    opts::{Opts, SubCommand},
-    process::process_csv,
-    process::process_genpass,
+    cli::{Opts, SubCommand},
+    process::{csv_convert::process_csv, gen_pass::process_genpass},
 };
 
 fn main() -> anyhow::Result<()> {

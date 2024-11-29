@@ -1,21 +1,6 @@
-use clap::{ArgAction, Parser};
+use clap::Parser;
 use core::fmt;
 use std::{path::Path, str::FromStr};
-
-#[derive(Debug, Parser)]
-#[command(name="rcli", version, author, long_about=None)]
-pub struct Opts {
-    #[command(subcommand)]
-    pub cmd: SubCommand,
-}
-
-#[derive(Debug, Parser)]
-pub enum SubCommand {
-    #[command(name = "csv", about = "Show CSV, or convert CSV to other formats")]
-    Csv(CsvOpts),
-    #[command(name = "genpass", about = "Generate a random password")]
-    Genpass(GenpassOpts),
-}
 
 #[derive(Debug, Clone, Copy)]
 pub enum OutputFormat {
@@ -39,25 +24,6 @@ pub struct CsvOpts {
 
     #[arg(long, help = "CSV has Header or not", default_value_t = true)]
     pub header: bool,
-}
-
-#[derive(Debug, Parser)]
-pub struct GenpassOpts {
-    #[arg(short, long, help = "Length of password", default_value = "16")]
-    pub length: u8,
-    #[arg(long, help = "With uppercase in the password", action = ArgAction::Set, default_value_t = true)]
-    pub uppercase: bool,
-    #[arg(long, help = "With lowercase in the password", action = ArgAction::Set, default_value_t = true)]
-    pub lowercase: bool,
-    #[arg(long, help = "With number in the password", action = ArgAction::Set, default_value_t = true)]
-    pub number: bool,
-    #[arg(
-        long,
-        help = "With special symbol in the password",
-        action = ArgAction::Set,
-        default_value_t = true
-    )]
-    pub symbol: bool,
 }
 
 fn verify_input_file(filename: &str) -> Result<String, String> {
