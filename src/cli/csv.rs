@@ -1,6 +1,8 @@
 use clap::Parser;
 use core::fmt;
-use std::{path::Path, str::FromStr};
+use std::str::FromStr;
+
+use super::verify_input_file;
 
 #[derive(Debug, Clone, Copy)]
 pub enum OutputFormat {
@@ -24,14 +26,6 @@ pub struct CsvOpts {
 
     #[arg(long, help = "CSV has Header or not", default_value_t = true)]
     pub header: bool,
-}
-
-fn verify_input_file(filename: &str) -> Result<String, String> {
-    if Path::new(filename).exists() {
-        Ok(filename.into())
-    } else {
-        Err("File does not exists".into())
-    }
 }
 
 fn parse_format(format: &str) -> Result<OutputFormat, anyhow::Error> {
