@@ -1,6 +1,7 @@
 pub mod base64;
 pub mod csv;
 pub mod genpass;
+pub mod http;
 pub mod text;
 
 use std::path::{Path, PathBuf};
@@ -9,6 +10,7 @@ use base64::Base64SubCommand;
 use clap::Parser;
 use csv::CsvOpts;
 use genpass::GenpassOpts;
+use http::HttpSubCommand;
 use text::TextSubCommand;
 
 #[derive(Debug, Parser)]
@@ -28,6 +30,8 @@ pub enum SubCommand {
     Base64(Base64SubCommand),
     #[command(subcommand, about = "Sign or verify a message")]
     Text(TextSubCommand),
+    #[command(subcommand, about = "Http server")]
+    Http(HttpSubCommand),
 }
 
 fn verify_path(path: &str) -> Result<PathBuf, &'static str> {
